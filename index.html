@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <title>Who Said It</title>
+  <style>
+    body {
+      padding: 33% 0;
+      font-family: "Poppins", sans-serif;
+      text-align: center;
+    }
+    #quote {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    #names {
+      display: flex;
+      justify-content: center;
+    }
+    .name-button {
+    display: inline-block;
+    outline: 0;
+    margin: 10px;
+    padding: 5px 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1;
+    transition: transform 200ms,background 200ms;
+    background: transparent;
+    color: #000000;
+    box-shadow: 0 0 0 3px #000000 inset;
+    }
+
+#footer {
+  font-size: 15px;
+}
+
+  </style>
+</head>
+<body>
+  <h1>Who Said It</h1>
+  <div id="quote"></div>
+  <div id="names">
+    <button class="name-button" onclick="checkName(this)"></button>
+    <button class="name-button" onclick="checkName(this)"></button>
+  </div>
+<footer id="footer">made with 🥨 by sam</footer>
+
+  <script>
+    // Your JSON data
+    var quotes = [
+        {
+          "quote": "DONT ASUME NO ONE WILL CARE",
+          "name": "Miss Thomas"
+        },
+        {
+          "quote": "YOU ARE ON MY RADAR",
+          "name": "Miss Walters-Presner"
+        },
+        {
+          "quote": "I HAVE BEEN INFORMED",
+          "name": "Miss Walters-Presner"
+        },
+        {
+          "quote": "DONT YOU DARE TELL A TEACHER WHEN ITS TIME TO LEAVE OR NOT IDC IF YOUR LATE GOING HOME YOU’RE THE REASON FOR IT",
+          "name": "Miss Thomas"
+        },
+        {
+          "quote": "I’ve got somewhere to be miss",
+          "name": "Lucian"
+        },
+        {
+          "quote": "IDC",
+          "name": "Miss Thomas"
+        },
+        {
+          "quote": "fuck-de-al",
+          "name": "Ellisar Rose Aldwairy"
+        },
+        {
+          "quote": "ben is so fine tho",
+          "name": "Ellisar Rose Aldwairy"
+        },
+        {
+          "quote": "they’re making me go up and down the stairs like a yo yo",
+          "name": "Ellisar Rose Aldwairy"
+        },
+        {
+          "quote": "yo",
+          "name": "Lillian Cole"
+        },
+        {
+          "quote": "im a gay piece of shit",
+          "name": "Theo Bell"
+        },
+        {
+          "quote": "IF YOU DONT SHUT UP ME AND YOU ARE GONNA FALL OUT!!!",
+          "name": "Ms Angell-Jones"
+        },
+        {
+          "quote": "It’s always the science lads",
+          "name": "Lily Isabella Cole"
+        },
+        {
+          "quote": "We are so gay",
+          "name": "Ffion James"
+        },
+        {
+          "quote": "fucking he’ll",
+          "name": "Samuel James"
+        },
+        {
+          "quote": "there’s voices in my head",
+          "name": "Luke Palmer"
+        },
+        {
+          "quote": "i feel like i’ve taken in too much theo",
+          "name": "Ellisar Rose Aldwairy"
+        },
+        {
+          "quote": "okay i’ll send tits to her now x",
+          "name": "Lily Cole"
+        },
+        {
+          "quote": "oh fudge cakes",
+          "name": "Ellisar Rose Aldwairy"
+        },
+        {
+          "quote": "mr manly eats 19 custard slices",
+          "name": "Mr Coles"
+        },
+        {
+          "quote": "that’s just my burrows watch a movie, unless he’s actually teaching",
+          "name": "Mr Deasy"
+        },
+        {
+          "quote": "if you have boobs like mr *coresses her boobs* then aim for your chest..",
+          "name": "Miss Angell-Jones"
+        },
+        {
+          "quote": "mmh",
+          "name": "Mr Williams"
+        },
+        {
+          "quote": "shut up with your shiny bold head",
+          "name": "Siena"
+        },
+        {
+          "quote": "chilly like my willy",
+          "name": "Lily Isabella Cole"
+        },
+        {
+          "quote": "Apprithiates it",
+          "name": "Ffion"
+        },
+        {
+          "quote": "what if i do the glue??",
+          "name": "Theomora"
+        },
+        {
+          "quote": "i actually feel.. QUITE OFFENDED",
+          "name": "Nina Stoneman"
+        },
+        {
+          "quote": "SHUT THY MOUTH",
+          "name": "Matilda Anne Burrup"
+        },
+        {
+          "quote": "MY FINGERS GURT FROM ALL THE a typing",
+          "name": "Tilly Burrup"
+        },
+        {
+          "quote": "blow me up till",
+          "name": "Lily Cole"
+        },
+        {
+          "quote": "I die dead",
+          "name": "Freya May Weaver"
+        },
+
+      {
+          "quote": "Why do they have to be crunchy why can’t they be soft",
+          "name": "Freya May Weaver"
+        }
+      ];
+
+    var currentQuoteIndex = -1;
+
+    // Function to display a random quote and associated names
+    function displayRandomQuote() {
+      // Ensure we don't repeat the same quote
+      var newIndex = currentQuoteIndex;
+      while (newIndex === currentQuoteIndex) {
+        newIndex = Math.floor(Math.random() * quotes.length);
+      }
+      currentQuoteIndex = newIndex;
+
+      var quote = quotes[currentQuoteIndex].quote;
+      var correctName = quotes[currentQuoteIndex].name;
+
+      document.getElementById("quote").innerText = quote;
+
+      var buttons = document.getElementsByClassName("name-button");
+
+      // Assign the correct name randomly to one of the buttons
+      var correctButtonIndex = Math.floor(Math.random() * buttons.length);
+      buttons[correctButtonIndex].innerText = correctName;
+
+      // Assign other name to the remaining button
+      var allNamesExceptCorrect = quotes.map(q => q.name).filter(name => name !== correctName);
+      var incorrectName = allNamesExceptCorrect[Math.floor(Math.random() * allNamesExceptCorrect.length)];
+      buttons[1 - correctButtonIndex].innerText = incorrectName;
+    }
+
+    // Function to check if the selected name is correct
+    function checkName(button) {
+      var selectedName = button.innerText.trim(); // Trim whitespace from the selected name
+      var correctName = quotes[currentQuoteIndex].name;
+
+      if (selectedName === correctName) {
+        alert("Correct!");
+      } else {
+        alert("Incorrect!");
+      }
+
+      // Display a new quote after the user makes a selection
+      displayRandomQuote();
+    }
+
+    // Display initial quote when the page loads
+    window.onload = function() {
+      displayRandomQuote();
+    };
+  </script>
+</body>
+</html>
